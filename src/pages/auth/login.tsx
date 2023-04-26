@@ -1,14 +1,15 @@
+import { AuthContext } from "@/contexts/auth-context";
 import { LoginForm } from "@/features/login/form";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 
-type notificationColorsType = {
+export type notificationColorsType = {
   [index: string]: string;
   error: string;
   warning: string;
   success: string;
 };
 
-const notificationColors: notificationColorsType = {
+export const notificationColors: notificationColorsType = {
   error: "bg-[#8C1017]",
   warning: "bg-[#DD8A06]",
   success: "bg-[#4465A1]",
@@ -19,6 +20,8 @@ const Login = () => {
     type: "",
     message: "",
   });
+
+  const auth = useContext(AuthContext);
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,6 +50,8 @@ const Login = () => {
         type: "success",
         message: "You have logged in successfully",
       });
+      const data = await response.json();
+      auth?.setAuthState(data.token);
     }
   };
 
