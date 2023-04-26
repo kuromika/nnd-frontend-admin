@@ -1,5 +1,6 @@
 import { AuthContext } from "@/contexts/auth-context";
 import { LoginForm } from "@/features/login/form";
+import { useRouter } from "next/router";
 import { FormEvent, useContext, useEffect, useState } from "react";
 
 export type notificationColorsType = {
@@ -16,12 +17,15 @@ export const notificationColors: notificationColorsType = {
 };
 
 const Login = () => {
+
   const [notification, setNotification] = useState({
     type: "",
     message: "",
   });
 
   const auth = useContext(AuthContext);
+  const router = useRouter();
+
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,6 +59,11 @@ const Login = () => {
     }
   };
 
+  if (auth && auth.token){
+    router.replace('/');
+    return null;
+  }
+  
   return (
     <section className="flex flex-col items-center justify-center h-full">
       <LoginForm handleSubmit={handleFormSubmit}></LoginForm>

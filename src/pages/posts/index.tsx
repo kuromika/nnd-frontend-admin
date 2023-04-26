@@ -1,5 +1,11 @@
+import Link from "next/link";
+
 const Posts = () => {
-  return <h1>posts</h1>;
+  return (
+    <section>
+      <Link href='/posts/create'> Create a new post</Link>
+    </section>
+  )
 };
 
 export default Posts;
