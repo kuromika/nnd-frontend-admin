@@ -2,6 +2,8 @@ import { PropsWithChildren, createContext, useEffect, useState } from "react";
 
 export type AuthContextType = null | {
     setAuthState: (token: string) => void,
+    isAuthenticated: () => boolean,
+    logOut: () => void,
     token: string | null,
 }
 
@@ -12,15 +14,29 @@ export const AuthProvider = (props: PropsWithChildren) => {
 
     useEffect(() => {
         setAuth(localStorage.getItem('token'));
-    },[])
+    }, [])
 
     const setAuthState = (token: string) => {
         localStorage.setItem('token', token);
         setAuth(token);
     }
 
+    const isAuthenticated = () => {
+        if (auth !== null) {
+            return true;
+        }
+        return false;
+    }
+
+    const logOut = () => {
+        if (typeof window !== undefined) {
+            localStorage.removeItem('token');
+        }
+        setAuth(null);
+    }
+
     return (
-        <AuthContext.Provider value={{setAuthState, token: auth}}>
+        <AuthContext.Provider value={{ setAuthState, isAuthenticated, logOut, token: auth }}>
             {props.children}
         </AuthContext.Provider>
     )
