@@ -1,13 +1,19 @@
 import { TextInput } from "@/components/text-input";
 import { WithLabel } from "@/components/with-label";
+import { FormEvent } from "react";
 
-export const LoginForm = () => {
+export const LoginForm = (props: {
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+}) => {
   return (
     <section>
       <h1 className="text-center mb-10 text-3xl font-bold text-[#FFFFFF]">
         Welcome back!
       </h1>
-      <form className="flex flex-col gap-5 items-center">
+      <form
+        className="flex flex-col gap-5 items-center"
+        onSubmit={props.handleSubmit}
+      >
         <WithLabel for="username" text="Username:">
           <TextInput id="username" type="text" name="username"></TextInput>
         </WithLabel>
