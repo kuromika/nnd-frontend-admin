@@ -9,8 +9,10 @@ export const SwitchButton = (props: {
     <button
       type="button"
       className={clsx(
-        "p-2 text-white",
-        props.selected ? "text-xl text-black" : "text-lg"
+        "p-2",
+        props.selected
+          ? "text-2xl font-bold bg-[#4465A1] text-white"
+          : "text-lg bg-[#DD8A06] text-black"
       )}
       onClick={props.handleClick}
     >
