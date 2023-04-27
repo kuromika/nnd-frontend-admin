@@ -1,21 +1,9 @@
-import { Notification, notificationType } from "@/components/notification";
+import { notificationType } from "@/components/notification";
 import { Protected } from "@/components/protected";
-import { SwitchButton } from "@/components/switch-button";
 import { AuthContext } from "@/contexts/auth-context";
-import { MarkdownPreview } from "@/features/write-post/markdown-preview";
-import { PostForm } from "@/features/write-post/post-form";
+import { PostEditor, postDataType } from "@/features/write-post/post-editor";
 import { useRouter } from "next/router";
 import { FormEvent, useContext, useState } from "react";
-
-enum modes {
-  write = 0,
-  preview = 1,
-}
-
-export type postDataType = {
-  isPublished: boolean;
-  content: string;
-};
 
 const CreatePost = () => {
   const [postData, setPostData] = useState<postDataType>({
@@ -28,21 +16,11 @@ const CreatePost = () => {
     message: "",
   });
 
-  const [mode, setMode] = useState(modes.write);
   const auth = useContext(AuthContext);
-
   const router = useRouter();
 
   const updateData = (field: string, value: string | boolean) => {
     setPostData((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const setWriteMode = () => {
-    setMode(modes.write);
-  };
-
-  const setPreviewMode = () => {
-    setMode(modes.preview);
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -77,35 +55,13 @@ const CreatePost = () => {
 
   return (
     <Protected mustBeAuth={true}>
-      <section className="flex flex-col pt-10 pb-5">
-        <div className="flex justify-center mb-5">
-          <SwitchButton
-            selected={mode === modes.write}
-            text="Write"
-            handleClick={setWriteMode}
-          ></SwitchButton>
-          <SwitchButton
-            selected={mode === modes.preview}
-            text="Preview"
-            handleClick={setPreviewMode}
-          ></SwitchButton>
-        </div>
-        {mode === modes.write ? (
-          <PostForm
-            data={postData}
-            update={updateData}
-            submit={handleSubmit}
-          ></PostForm>
-        ) : (
-          <MarkdownPreview markdown={postData.content}></MarkdownPreview>
-        )}
-        {notification.message && (
-          <Notification
-            message={notification.message}
-            type={notification.type}
-          ></Notification>
-        )}
-      </section>
+      <PostEditor
+        handleSubmit={handleSubmit}
+        updateData={updateData}
+        notification={notification}
+        postData={postData}
+        action="Create"
+      ></PostEditor>
     </Protected>
   );
 };

@@ -15,7 +15,7 @@ export type postDataType = {
 };
 
 export type postEditorProps = {
-  action?: string;
+  action: string;
   updateData: (field: string, value: string | boolean) => void;
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
   postData: postDataType;
@@ -57,6 +57,7 @@ export const PostEditor = ({
           data={postData}
           update={updateData}
           submit={handleSubmit}
+          action={action}
         ></PostForm>
       ) : (
         <MarkdownPreview markdown={postData.content}></MarkdownPreview>

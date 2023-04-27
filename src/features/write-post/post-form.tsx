@@ -1,11 +1,12 @@
 import { WithLabel } from "@/components/with-label";
-import { postDataType } from "@/pages/posts/create";
 import { ChangeEvent, FormEvent } from "react";
+import { postDataType } from "./post-editor";
 
 export const PostForm = (props: {
   update: (field: string, value: string | boolean) => void;
   data: postDataType;
   submit: (e: FormEvent<HTMLFormElement>) => void;
+  action: string;
 }) => {
   const handleChange = (
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -45,7 +46,7 @@ export const PostForm = (props: {
           type="submit"
           className=" p-3 text-[#FFFFFF] bg-[#4465A1] rounded font-bold text-xl"
         >
-          Create
+          {props.action}
         </button>
       </form>
     </div>
