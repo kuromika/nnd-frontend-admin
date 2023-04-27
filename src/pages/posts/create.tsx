@@ -8,7 +8,21 @@ enum modes {
   preview = 1,
 }
 
+export type postDataType = {
+  isPublished: boolean;
+  content: string;
+};
+
 const CreatePost = () => {
+  const [postData, setPostData] = useState<postDataType>({
+    isPublished: false,
+    content: "",
+  });
+
+  const updateData = (field: string, value: string | boolean) => {
+    setPostData((prev) => ({ ...prev, [field]: value }));
+  };
+
   const [mode, setMode] = useState(modes.write);
 
   const setWriteMode = () => {
@@ -34,10 +48,11 @@ const CreatePost = () => {
         ></SwitchButton>
       </div>
       {mode === modes.write ? (
-        <PostForm></PostForm>
+        <PostForm data={postData} update={updateData}></PostForm>
       ) : (
         <MarkdownPreview></MarkdownPreview>
       )}
+      <h1>{JSON.stringify(postData)}</h1>
     </section>
   );
 };
