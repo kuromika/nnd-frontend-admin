@@ -4,7 +4,7 @@ import { PostCard } from "./post-card";
 
 export const PostsBoard = ({ posts }: { posts: PostType[] }) => {
   return (
-    <ul className="posts-board w-full p-24">
+    <ul className="posts-board w-full p-24 pt-12 pb-12">
       {posts.map((post) => {
         const postData = matter(post.content).data;
         return (
