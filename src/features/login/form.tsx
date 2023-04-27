@@ -6,7 +6,7 @@ export const LoginForm = (props: {
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }) => {
   return (
-    <section>
+    <>
       <h1 className="text-center mb-10 text-3xl font-bold text-[#FFFFFF]">
         Welcome back!
       </h1>
@@ -27,6 +27,6 @@ export const LoginForm = (props: {
           Log in
         </button>
       </form>
-    </section>
+    </>
   );
 };

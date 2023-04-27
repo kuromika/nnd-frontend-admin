@@ -8,7 +8,7 @@ export const Main = ({ children }: PropsWithChildren) => {
       <Header></Header>
       <div className="flex flex-grow">
         <Navigation></Navigation>
-        <main className="bg-[#0C1219] w-full">{children}</main>
+        <main className="bg-[#0C1219] flex-grow">{children}</main>
       </div>
     </div>
   );
