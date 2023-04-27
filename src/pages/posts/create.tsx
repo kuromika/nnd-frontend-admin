@@ -19,11 +19,11 @@ const CreatePost = () => {
     content: "",
   });
 
+  const [mode, setMode] = useState(modes.write);
+
   const updateData = (field: string, value: string | boolean) => {
     setPostData((prev) => ({ ...prev, [field]: value }));
   };
-
-  const [mode, setMode] = useState(modes.write);
 
   const setWriteMode = () => {
     setMode(modes.write);
@@ -50,9 +50,8 @@ const CreatePost = () => {
       {mode === modes.write ? (
         <PostForm data={postData} update={updateData}></PostForm>
       ) : (
-        <MarkdownPreview></MarkdownPreview>
+        <MarkdownPreview markdown={postData.content}></MarkdownPreview>
       )}
-      <h1>{JSON.stringify(postData)}</h1>
     </section>
   );
 };

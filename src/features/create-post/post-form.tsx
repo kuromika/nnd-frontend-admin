@@ -9,7 +9,6 @@ export const PostForm = (props: {
   const handleChange = (
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
-    console.log(e.target.name);
     if (e.target.name === "isPublished") {
       props.update(e.target.name, (e.target as HTMLInputElement).checked);
       return;
