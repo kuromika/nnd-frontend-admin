@@ -11,6 +11,11 @@ export const notificationColors: notificationColorsType = {
   success: "bg-[#4465A1]",
 };
 
+export type notificationType = {
+  message: string;
+  type: string;
+};
+
 export const Notification = ({
   message,
   type,

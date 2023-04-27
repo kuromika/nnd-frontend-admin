@@ -1,3 +1,4 @@
+import { Notification, notificationType } from "@/components/notification";
 import { SwitchButton } from "@/components/switch-button";
 import { AuthContext } from "@/contexts/auth-context";
 import { MarkdownPreview } from "@/features/create-post/markdown-preview";
@@ -21,8 +22,14 @@ const CreatePost = () => {
     content: "",
   });
 
+  const [notification, setNotification] = useState<notificationType>({
+    type: "",
+    message: "",
+  });
+
   const [mode, setMode] = useState(modes.write);
   const auth = useContext(AuthContext);
+
   const router = useRouter();
 
   const updateData = (field: string, value: string | boolean) => {
@@ -48,11 +55,28 @@ const CreatePost = () => {
       }),
       body: JSON.stringify(postData),
     });
-    router.push("/posts");
+
+    const data = await response.json();
+    console.log(data);
+
+    if (response.status === 200) {
+      setNotification({
+        type: "success",
+        message: `Post ${data._id} created successfully, you will be redirect soon...`,
+      });
+      setTimeout(() => {
+        router.push("/posts");
+      }, 2000);
+    } else {
+      setNotification({
+        type: "error",
+        message: `There was an error with status ${response.status}`,
+      });
+    }
   };
 
   return (
-    <section className="flex flex-col pt-10 pb-10">
+    <section className="flex flex-col pt-10 pb-5">
       <div className="flex justify-center mb-5">
         <SwitchButton
           selected={mode === modes.write}
@@ -73,6 +97,12 @@ const CreatePost = () => {
         ></PostForm>
       ) : (
         <MarkdownPreview markdown={postData.content}></MarkdownPreview>
+      )}
+      {notification.message && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+        ></Notification>
       )}
     </section>
   );

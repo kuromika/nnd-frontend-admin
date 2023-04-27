@@ -25,7 +25,7 @@ export const PostForm = (props: {
         onSubmit={props.submit}
       >
         <textarea
-          className="w-[80%] h-[450px] bg-[#030407] resize-none text-[#FFFFFF] p-5 text-xl"
+          className="w-[80%] h-[400px] bg-[#030407] resize-none text-[#FFFFFF] p-5 text-xl"
           name="content"
           placeholder="write the coolest blog post"
           onChange={handleChange}
