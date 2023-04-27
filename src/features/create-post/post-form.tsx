@@ -4,9 +4,9 @@ export const PostForm = () => {
   return (
     <div className="flex flex-col items-center gap-10 h-full">
       <h1 className="text-2xl text-white">What are you thinking about?</h1>
-      <form className="min-w-full h-[70%] flex flex-col items-center gap-10">
+      <form className="min-w-full  flex flex-col items-center gap-10">
         <textarea
-          className="w-[80%] h-[90%] bg-[#030407] resize-none text-[#FFFFFF] p-5 text-xl"
+          className="w-[80%] h-[450px] bg-[#030407] resize-none text-[#FFFFFF] p-5 text-xl"
           name="content"
           placeholder="write the coolest blog post"
         ></textarea>

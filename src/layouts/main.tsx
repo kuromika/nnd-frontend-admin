@@ -4,11 +4,11 @@ import { Navigation } from "./navigation";
 
 export const Main = ({ children }: PropsWithChildren) => {
   return (
-    <div className="flex flex-col min-h-screen font-mincho">
+    <div className="flex flex-col font-mincho min-h-screen bg-[#0C1219]">
       <Header></Header>
-      <div className="flex flex-grow">
+      <div className="flex-grow flex">
         <Navigation></Navigation>
-        <main className="bg-[#0C1219] flex-grow">{children}</main>
+        <main className="flex-grow">{children}</main>
       </div>
     </div>
   );
