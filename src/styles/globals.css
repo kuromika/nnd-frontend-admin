@@ -6,3 +6,7 @@
   font-family: "Mincho";
   src: url("../../public/HGRMB_0.TTC");
 }
+
+.markdown-body {
+  color-scheme: dark;
+}
