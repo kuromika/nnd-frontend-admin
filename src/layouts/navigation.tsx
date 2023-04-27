@@ -14,8 +14,8 @@ export const Navigation = () => {
 
   return (
     <nav className="flex flex-col gap-5 p-5 bg-[#04070A] text-white w-40 font-bold text-xl text-center">
-      {!auth?.isAuthenticated() && <Link href={"/auth/login"}>Log in</Link>}
-      {auth?.isAuthenticated() && (
+      {!auth.isAuthenticated() && <Link href={"/auth/login"}>Log in</Link>}
+      {auth.isAuthenticated() && (
         <>
           <Link href="/posts">Posts</Link>
           <button type="button" onClick={handleLogOut}>
