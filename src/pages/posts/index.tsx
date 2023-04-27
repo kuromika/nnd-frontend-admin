@@ -1,8 +1,6 @@
 import { Protected } from "@/components/protected";
 import { PostsBoard } from "@/features/posts-board/board";
-import { PostCard, PostCardProps } from "@/features/posts-board/post-card";
 import { PostType } from "@/types/post";
-import matter from "gray-matter";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
