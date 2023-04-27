@@ -1,7 +1,9 @@
 import { SwitchButton } from "@/components/switch-button";
+import { AuthContext } from "@/contexts/auth-context";
 import { MarkdownPreview } from "@/features/create-post/markdown-preview";
 import { PostForm } from "@/features/create-post/post-form";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { FormEvent, useContext, useState } from "react";
 
 enum modes {
   write = 0,
@@ -20,6 +22,8 @@ const CreatePost = () => {
   });
 
   const [mode, setMode] = useState(modes.write);
+  const auth = useContext(AuthContext);
+  const router = useRouter();
 
   const updateData = (field: string, value: string | boolean) => {
     setPostData((prev) => ({ ...prev, [field]: value }));
@@ -31,6 +35,20 @@ const CreatePost = () => {
 
   const setPreviewMode = () => {
     setMode(modes.preview);
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const response = await fetch("https://nnd-backend.up.railway.app/posts", {
+      method: "POST",
+      mode: "cors",
+      headers: new Headers({
+        Authorization: `Bearer ${auth.token}`,
+        "Content-Type": "application/json",
+      }),
+      body: JSON.stringify(postData),
+    });
+    router.push("/posts");
   };
 
   return (
@@ -48,7 +66,11 @@ const CreatePost = () => {
         ></SwitchButton>
       </div>
       {mode === modes.write ? (
-        <PostForm data={postData} update={updateData}></PostForm>
+        <PostForm
+          data={postData}
+          update={updateData}
+          submit={handleSubmit}
+        ></PostForm>
       ) : (
         <MarkdownPreview markdown={postData.content}></MarkdownPreview>
       )}

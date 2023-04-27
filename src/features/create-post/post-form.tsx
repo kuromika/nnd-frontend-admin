@@ -1,10 +1,11 @@
 import { WithLabel } from "@/components/with-label";
 import { postDataType } from "@/pages/posts/create";
-import { ChangeEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 
 export const PostForm = (props: {
   update: (field: string, value: string | boolean) => void;
   data: postDataType;
+  submit: (e: FormEvent<HTMLFormElement>) => void;
 }) => {
   const handleChange = (
     e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -19,7 +20,10 @@ export const PostForm = (props: {
   return (
     <div className="flex flex-col items-center gap-10 h-full">
       <h1 className="text-2xl text-white">What are you thinking about?</h1>
-      <form className="min-w-full  flex flex-col items-center gap-10">
+      <form
+        className="min-w-full  flex flex-col items-center gap-10"
+        onSubmit={props.submit}
+      >
         <textarea
           className="w-[80%] h-[450px] bg-[#030407] resize-none text-[#FFFFFF] p-5 text-xl"
           name="content"
