@@ -1,4 +1,5 @@
 import { Notification, notificationType } from "@/components/notification";
+import { Protected } from "@/components/protected";
 import { SwitchButton } from "@/components/switch-button";
 import { AuthContext } from "@/contexts/auth-context";
 import { MarkdownPreview } from "@/features/create-post/markdown-preview";
@@ -76,35 +77,37 @@ const CreatePost = () => {
   };
 
   return (
-    <section className="flex flex-col pt-10 pb-5">
-      <div className="flex justify-center mb-5">
-        <SwitchButton
-          selected={mode === modes.write}
-          text="Write"
-          handleClick={setWriteMode}
-        ></SwitchButton>
-        <SwitchButton
-          selected={mode === modes.preview}
-          text="Preview"
-          handleClick={setPreviewMode}
-        ></SwitchButton>
-      </div>
-      {mode === modes.write ? (
-        <PostForm
-          data={postData}
-          update={updateData}
-          submit={handleSubmit}
-        ></PostForm>
-      ) : (
-        <MarkdownPreview markdown={postData.content}></MarkdownPreview>
-      )}
-      {notification.message && (
-        <Notification
-          message={notification.message}
-          type={notification.type}
-        ></Notification>
-      )}
-    </section>
+    <Protected mustBeAuth={true}>
+      <section className="flex flex-col pt-10 pb-5">
+        <div className="flex justify-center mb-5">
+          <SwitchButton
+            selected={mode === modes.write}
+            text="Write"
+            handleClick={setWriteMode}
+          ></SwitchButton>
+          <SwitchButton
+            selected={mode === modes.preview}
+            text="Preview"
+            handleClick={setPreviewMode}
+          ></SwitchButton>
+        </div>
+        {mode === modes.write ? (
+          <PostForm
+            data={postData}
+            update={updateData}
+            submit={handleSubmit}
+          ></PostForm>
+        ) : (
+          <MarkdownPreview markdown={postData.content}></MarkdownPreview>
+        )}
+        {notification.message && (
+          <Notification
+            message={notification.message}
+            type={notification.type}
+          ></Notification>
+        )}
+      </section>
+    </Protected>
   );
 };
 

@@ -1,4 +1,5 @@
 import { Notification } from "@/components/notification";
+import { Protected } from "@/components/protected";
 import { AuthContext } from "@/contexts/auth-context";
 import { LoginForm } from "@/features/login/form";
 import { useRouter } from "next/router";
@@ -53,15 +54,17 @@ const Login = () => {
   }
 
   return (
-    <section className="flex flex-col items-center justify-center h-full">
-      <LoginForm handleSubmit={handleFormSubmit}></LoginForm>
-      {notification.message && (
-        <Notification
-          type={notification.type}
-          message={notification.message}
-        ></Notification>
-      )}
-    </section>
+    <Protected mustBeAuth={false}>
+      <section className="flex flex-col items-center justify-center h-full">
+        <LoginForm handleSubmit={handleFormSubmit}></LoginForm>
+        {notification.message && (
+          <Notification
+            type={notification.type}
+            message={notification.message}
+          ></Notification>
+        )}
+      </section>
+    </Protected>
   );
 };
 
