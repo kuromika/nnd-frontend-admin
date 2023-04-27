@@ -13,6 +13,7 @@ export const PostsBoard = ({ posts }: { posts: PostType[] }) => {
             description={postData.description}
             title={postData.title}
             image={postData.image}
+            id={post._id}
           ></PostCard>
         );
       })}
