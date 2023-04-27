@@ -1,20 +1,8 @@
+import { Notification } from "@/components/notification";
 import { AuthContext } from "@/contexts/auth-context";
 import { LoginForm } from "@/features/login/form";
 import { useRouter } from "next/router";
 import { FormEvent, useContext, useState } from "react";
-
-export type notificationColorsType = {
-  [index: string]: string;
-  error: string;
-  warning: string;
-  success: string;
-};
-
-export const notificationColors: notificationColorsType = {
-  error: "bg-[#8C1017]",
-  warning: "bg-[#DD8A06]",
-  success: "bg-[#4465A1]",
-};
 
 const Login = () => {
   const [notification, setNotification] = useState({
@@ -68,13 +56,10 @@ const Login = () => {
     <section className="flex flex-col items-center justify-center h-full">
       <LoginForm handleSubmit={handleFormSubmit}></LoginForm>
       {notification.message && (
-        <p
-          className={`${
-            notificationColors[notification.type]
-          } mt-5 p-2 rounded text-white font-bold text-lg text-center`}
-        >
-          {notification.message}
-        </p>
+        <Notification
+          type={notification.type}
+          message={notification.message}
+        ></Notification>
       )}
     </section>
   );
