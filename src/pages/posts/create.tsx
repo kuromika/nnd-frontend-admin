@@ -2,8 +2,8 @@ import { Notification, notificationType } from "@/components/notification";
 import { Protected } from "@/components/protected";
 import { SwitchButton } from "@/components/switch-button";
 import { AuthContext } from "@/contexts/auth-context";
-import { MarkdownPreview } from "@/features/create-post/markdown-preview";
-import { PostForm } from "@/features/create-post/post-form";
+import { MarkdownPreview } from "@/features/write-post/markdown-preview";
+import { PostForm } from "@/features/write-post/post-form";
 import { useRouter } from "next/router";
 import { FormEvent, useContext, useState } from "react";
 
