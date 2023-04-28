@@ -13,7 +13,7 @@ export const Navigation = () => {
   };
 
   return (
-    <nav className="flex flex-col gap-5 p-5 bg-[#04070A] text-white w-52 font-bold text-2xl items-center">
+    <nav className="flex flex-col gap-5 p-5 bg-[#04070A] text-white w-52 font-bold text-2xl items-center w-full md:w-52">
       {!auth.isAuthenticated() && <Link href={"/auth/login"}>Log in</Link>}
       {auth.isAuthenticated() && (
         <>
