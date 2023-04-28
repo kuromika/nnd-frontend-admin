@@ -45,6 +45,11 @@ const Posts = () => {
     );
     if (response.status === 200) {
       setPosts((prev) => prev.filter((post) => post._id !== id));
+    } else {
+      setNotification({
+        type: "error",
+        message: `There was a ${response.status} error while deleting the post`,
+      });
     }
   };
 
