@@ -2,7 +2,12 @@ import { PostType } from "@/types/post";
 import matter from "gray-matter";
 import { PostCard } from "./post-card";
 
-export const PostsBoard = ({ posts }: { posts: PostType[] }) => {
+export type PostBoardProps = {
+  posts: PostType[];
+  remove: (id: string) => void;
+};
+
+export const PostsBoard = ({ posts, remove }: PostBoardProps) => {
   return (
     <ul className="posts-board w-full p-24 pt-12 pb-12">
       {posts.map((post) => {
@@ -14,6 +19,7 @@ export const PostsBoard = ({ posts }: { posts: PostType[] }) => {
             title={postData.title}
             image={postData.image}
             id={post._id}
+            remove={remove}
           ></PostCard>
         );
       })}

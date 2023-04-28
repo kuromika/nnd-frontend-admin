@@ -5,11 +5,21 @@ export type PostCardProps = {
   title?: string;
   description?: string;
   id: string;
+  remove: (id: string) => void;
 };
 
 const DEFAULT_IMAGE = "/saya.png";
 
-export const PostCard = ({ title, description, image, id }: PostCardProps) => {
+export const PostCard = ({
+  title,
+  description,
+  image,
+  id,
+  remove,
+}: PostCardProps) => {
+  const handleRemove = () => {
+    remove(id);
+  };
   return (
     <li className="flex flex-col gap-2 b-[#FFFFFF] border-4 rounded bg-[#040402]">
       <img
@@ -29,6 +39,13 @@ export const PostCard = ({ title, description, image, id }: PostCardProps) => {
         >
           Update
         </Link>
+        <button
+          type="button"
+          onClick={handleRemove}
+          className="bg-[#8C1017] p-3 text-xl uppercase rounded"
+        >
+          Delete
+        </button>
       </div>
     </li>
   );
