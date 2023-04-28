@@ -1,3 +1,4 @@
+import { Notification, notificationType } from "@/components/notification";
 import { Protected } from "@/components/protected";
 import { PostsBoard } from "@/features/posts-board/board";
 import { PostType } from "@/types/post";
@@ -6,15 +7,24 @@ import { useEffect, useState } from "react";
 
 const Posts = () => {
   const [posts, setPosts] = useState<PostType[]>([]);
+  const [notification, setNotification] = useState<notificationType>({
+    type: "",
+    message: "",
+  });
 
   useEffect(() => {
     const fetchPosts = async () => {
       const response = await fetch("https://nnd-backend.up.railway.app/posts", {
         mode: "cors",
       });
-      const data = await response.json();
       if (response.status === 200) {
+        const data = await response.json();
         setPosts(data);
+      } else {
+        setNotification({
+          type: "error",
+          message: `There was a ${response.status} error while retrieving the post`,
+        });
       }
     };
     fetchPosts();
@@ -30,6 +40,12 @@ const Posts = () => {
           Create a new post
         </Link>
         <PostsBoard posts={posts}></PostsBoard>
+        {notification.message && (
+          <Notification
+            message={notification.message}
+            type={notification.type}
+          ></Notification>
+        )}
       </section>
     </Protected>
   );
