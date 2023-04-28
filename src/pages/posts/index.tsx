@@ -32,6 +32,12 @@ const Posts = () => {
 
   return (
     <Protected mustBeAuth={true}>
+      {notification.message && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+        ></Notification>
+      )}
       <section className="flex flex-col items-center mt-10">
         <Link
           href="/posts/create"
@@ -40,12 +46,6 @@ const Posts = () => {
           Create a new post
         </Link>
         <PostsBoard posts={posts}></PostsBoard>
-        {notification.message && (
-          <Notification
-            message={notification.message}
-            type={notification.type}
-          ></Notification>
-        )}
       </section>
     </Protected>
   );

@@ -35,9 +35,8 @@ const CreatePost = () => {
       body: JSON.stringify(postData),
     });
 
-    const data = await response.json();
-
     if (response.status === 200) {
+      const data = await response.json();
       setNotification({
         type: "success",
         message: `Post ${data._id} created successfully, you will be redirect soon...`,
