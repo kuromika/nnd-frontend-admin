@@ -15,10 +15,9 @@
   display: grid;
   gap: 50px;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  grid-auto-flow: row;
   justify-items: center;
-  align-items: center;
   justify-content: center;
+  grid-auto-rows: 1fr;
 }
 
 @media (max-width: 768px) {
